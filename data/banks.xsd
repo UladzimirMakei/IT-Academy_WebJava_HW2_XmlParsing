@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/banks"
+        xmlns:tns="http://www.example.com/banks"
+        elementFormDefault="qualified">
+    <element name="banks">
+        <complexType>
+            <sequence>
+                <element name="bank" type="tns:Bank" maxOccurs="100"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Bank">
+        <sequence>
+            <element name="deposits" type="tns:Deposits"/>
+        </sequence>
+        <attribute name="name" type="tns:Name" use="required"/>
+        <attribute name="registration" use="optional" default="Unspecified">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="Belarus"></enumeration>
+                    <enumeration value="USA"></enumeration>
+                    <enumeration value="China"></enumeration>
+                    <enumeration value="Unspecified"></enumeration>
+                    <pattern value="[a-zA-Z]+"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+    <simpleType name="Name">
+        <restriction base="string">
+            <pattern value="[a-zA-Z]+\s[a-zA-Z]+"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Deposits">
+        <sequence>
+            <element name="deposit" type="tns:Deposit"/>
+        </sequence>
+        <attribute name="id" type="tns:Id" use="required"/>
+        <attribute name="type" use="required">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="fixed-term"></enumeration>
+                    <enumeration value="passbook"></enumeration>
+                    <enumeration value="demand"></enumeration>
+                    <enumeration value="forward"></enumeration>
+                    <enumeration value="irrevocable"></enumeration>
+                    <enumeration value="corporate"></enumeration>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+    <simpleType name="Id">
+        <restriction base="ID">
+            <pattern value="\d+"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Deposit">
+        <sequence>
+            <element name="holder" type="string"/>
+            <element name="amount" type="positiveInteger"/>
+            <element name="profitability" type="string"/>
+            <element name = "opening" type = "date"/>
+            <element name="term" type="positiveInteger"/>
+        </sequence>
+    </complexType>
+</schema>

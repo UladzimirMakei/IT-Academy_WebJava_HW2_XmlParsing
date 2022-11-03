@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<banks>
+    <bank name="Belarusbank" registration="Belarus">
+        <deposits>
+            <deposit id="1831343" type="forward">
+                <holder>Ivan Zhukau</holder>
+                <amount>220000</amount>
+                <profitability>5%</profitability>
+                <opening>10-11-2018</opening>
+                <term>10</term>
+            </deposit>
+            <deposit id="12312334" type="fixed-term">
+                <holder>Mark Zuev</holder>
+                <amount>120000</amount>
+                <profitability>3,5%</profitability>
+                <opening>5-10-2019</opening>
+                <term>5</term>
+            </deposit>
+            <deposit id="12331223" type="passbook">
+                <holder>Alex Panov</holder>
+                <amount>250000</amount>
+                <profitability>2,5%</profitability>
+                <opening>30-12-2020</opening>
+                <term>3</term>
+            </deposit>
+            <deposit id="123233113" type="corporate">
+                <holder>Andrew Kalinau</holder>
+                <amount>200000</amount>
+                <profitability>5%</profitability>
+                <opening>10-11-2018</opening>
+                <term>5</term>
+            </deposit>
+            <deposit id="43125473" type="irrevocable">
+                <holder>Philip Alexau</holder>
+                <amount>100000</amount>
+                <profitability>5%</profitability>
+                <opening>10-11-2018</opening>
+                <term>5</term>
+            </deposit>
+        </deposits>
+    </bank>
+    <bank name="Priorbank">
+        <deposits>
+            <deposit id="5573123" type="corporate">
+                <holder>Alex Svetlau</holder>
+                <amount>120000</amount>
+                <profitability>5%</profitability>
+                <opening>12-10-2019</opening>
+                <term>10</term>
+            </deposit>
+            <deposit id="54543123" type="irrevocable">
+                <holder>Andrew Martinau</holder>
+                <amount>200000</amount>
+                <profitability>2,4%</profitability>
+                <opening>01-05-2022</opening>
+                <term>5</term>
+            </deposit>
+            <deposit id="34343123" type="forward">
+                <holder>Mark Grishin</holder>
+                <amount>150000</amount>
+                <profitability>2,4%</profitability>
+                <opening>10-08-2020</opening>
+                <term>8</term>
+            </deposit>
+            <deposit id="42343123" type="demand">
+                <holder>Aleh Rubleu</holder>
+                <amount>100000</amount>
+                <profitability>3,5%</profitability>
+                <opening>03-09-2021</opening>
+                <term>3</term>
+            </deposit>
+        </deposits>
+    </bank>
+    <bank name="Bank of America" registration="USA">
+        <deposits>
+            <deposit id="8323123" type="forward">
+                <holder>Sergey Dovlatov</holder>
+                <amount>150000</amount>
+                <profitability>2,5%</profitability>
+                <opening>02-05-2020</opening>
+                <term>5</term>
+            </deposit>
+            <deposit id="012323123" type="passbook">
+                <holder>Valeriia Johns</holder>
+                <amount>200000</amount>
+                <profitability>3,5%</profitability>
+                <opening>05-08-2021</opening>
+                <term>3</term>
+            </deposit>
+            <deposit id="33423123" type="demand">
+                <holder>Donald Crosby</holder>
+                <amount>150000</amount>
+                <profitability>3,0%</profitability>
+                <opening>12-03-2021</opening>
+                <term>3</term>
+            </deposit>
+            <deposit id="657623123" type="passbook">
+                <holder>Mike Allan</holder>
+                <amount>150000</amount>
+                <profitability>3,3%</profitability>
+                <opening>12-05-2020</opening>
+                <term>4</term>
+            </deposit>
+        </deposits>
+    </bank>
+    <bank name="Bank of China" registration="China">
+        <deposits>
+            <deposit id="90823123" type="passbook">
+                <holder>Xio Ling</holder>
+                <amount>250000</amount>
+                <profitability>1,5%</profitability>
+                <opening>12-01-2022</opening>
+                <term>2</term>
+            </deposit>
+            <deposit id="8783123" type="demand">
+                <holder>Kio Tang</holder>
+                <amount>200000</amount>
+                <profitability>4,5%</profitability>
+                <opening>1-05-2019</opening>
+                <term>6</term>
+            </deposit>
+            <deposit id="34257588" type="irrevocable">
+                <holder>Xi Ka</holder>
+                <amount>150000</amount>
+                <profitability>3,5%</profitability>
+                <opening>15-04-2021</opening>
+                <term>3</term>
+            </deposit>
+            <deposit id="87878785" type="fixed-term">
+                <holder>Xyan Lu</holder>
+                <amount>120000</amount>
+                <profitability>2,5%</profitability>
+                <opening>12-04-2020</opening>
+                <term>5</term>
+            </deposit>
+        </deposits>
+    </bank>
+</banks>

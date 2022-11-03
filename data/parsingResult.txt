@@ -1,0 +1,88 @@
+Bank: 
+Bank name = Belarusbank
+Country of registration = Belarus
+Deposits =[
+Deposit: id = 1831343
+depositType = forward, holder = Ivan Zhukau
+amount = 220000, profitability = 5%
+openingDate = 2018-11-10, term = 10, 
+Deposit: id = 12312334
+depositType = fixed-term, holder = Mark Zuev
+amount = 120000, profitability = 3,5%
+openingDate = 2019-10-05, term = 5, 
+Deposit: id = 12331223
+depositType = passbook, holder = Alex Panov
+amount = 250000, profitability = 2,5%
+openingDate = 2020-12-30, term = 3, 
+Deposit: id = 123233113
+depositType = corporate, holder = Andrew Kalinau
+amount = 200000, profitability = 5%
+openingDate = 2018-11-10, term = 5, 
+Deposit: id = 43125473
+depositType = irrevocable, holder = Philip Alexau
+amount = 100000, profitability = 5%
+openingDate = 2018-11-10, term = 5]
+ 
+Bank: 
+Bank name = Priorbank
+Country of registration = 
+Deposits =[
+Deposit: id = 5573123
+depositType = corporate, holder = Alex Svetlau
+amount = 120000, profitability = 5%
+openingDate = 2019-10-12, term = 10, 
+Deposit: id = 54543123
+depositType = irrevocable, holder = Andrew Martinau
+amount = 200000, profitability = 2,4%
+openingDate = 2022-05-01, term = 5, 
+Deposit: id = 34343123
+depositType = forward, holder = Mark Grishin
+amount = 150000, profitability = 2,4%
+openingDate = 2020-08-10, term = 8, 
+Deposit: id = 42343123
+depositType = demand, holder = Aleh Rubleu
+amount = 100000, profitability = 3,5%
+openingDate = 2021-09-03, term = 3]
+ 
+Bank: 
+Bank name = Bank of America
+Country of registration = USA
+Deposits =[
+Deposit: id = 8323123
+depositType = forward, holder = Sergey Dovlatov
+amount = 150000, profitability = 2,5%
+openingDate = 2020-05-02, term = 5, 
+Deposit: id = 12323123
+depositType = passbook, holder = Valeriia Johns
+amount = 200000, profitability = 3,5%
+openingDate = 2021-08-05, term = 3, 
+Deposit: id = 33423123
+depositType = demand, holder = Donald Crosby
+amount = 150000, profitability = 3,0%
+openingDate = 2021-03-12, term = 3, 
+Deposit: id = 657623123
+depositType = passbook, holder = Mike Allan
+amount = 150000, profitability = 3,3%
+openingDate = 2020-05-12, term = 4]
+ 
+Bank: 
+Bank name = Bank of China
+Country of registration = China
+Deposits =[
+Deposit: id = 90823123
+depositType = passbook, holder = Xio Ling
+amount = 250000, profitability = 1,5%
+openingDate = 2022-01-12, term = 2, 
+Deposit: id = 8783123
+depositType = demand, holder = Kio Tang
+amount = 200000, profitability = 4,5%
+openingDate = 2019-05-01, term = 6, 
+Deposit: id = 34257588
+depositType = irrevocable, holder = Xi Ka
+amount = 150000, profitability = 3,5%
+openingDate = 2021-04-15, term = 3, 
+Deposit: id = 87878785
+depositType = fixed-term, holder = Xyan Lu
+amount = 120000, profitability = 2,5%
+openingDate = 2020-04-12, term = 5]
+ 
