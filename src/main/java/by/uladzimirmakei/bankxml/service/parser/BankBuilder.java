@@ -1,4 +1,4 @@
-package by.uladzimirmakei.bankxml.parser;
+package by.uladzimirmakei.bankxml.service.parser;
 
 import by.uladzimirmakei.bankxml.repository.impl.BankRepository;
 

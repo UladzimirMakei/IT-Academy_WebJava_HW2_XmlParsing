@@ -1,7 +1,7 @@
-package by.uladzimirmakei.bankxml.validator.impl;
+package by.uladzimirmakei.bankxml.service.validator.impl;
 
-import by.uladzimirmakei.bankxml.handler.BankErrorHandler;
-import by.uladzimirmakei.bankxml.validator.BankValidator;
+import by.uladzimirmakei.bankxml.service.handler.BankErrorHandler;
+import by.uladzimirmakei.bankxml.service.validator.BankValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +33,10 @@ public class BankValidatorImpl implements BankValidator {
             validator.validate(source);
             result = true;
         } catch (SAXException | IOException e) {
-            logger.log(Level.ERROR, "{} is not correct or valid {}", fileName, e.getMessage());
+            logger.log(Level.ERROR, "{} is not correct or valid {}",
+                    fileName, e.getMessage());
         }
         return result;
     }
 }
+

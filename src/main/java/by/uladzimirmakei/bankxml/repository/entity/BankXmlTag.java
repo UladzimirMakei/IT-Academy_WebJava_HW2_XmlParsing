@@ -1,4 +1,4 @@
-package by.uladzimirmakei.bankxml.entity;
+package by.uladzimirmakei.bankxml.repository.entity;
 
 public enum BankXmlTag {
     BANKS("banks"),

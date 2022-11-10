@@ -1,7 +1,7 @@
-package by.uladzimirmakei.bankxml.parser.sax;
+package by.uladzimirmakei.bankxml.service.parser.sax;
 
-import by.uladzimirmakei.bankxml.handler.BankErrorHandler;
-import by.uladzimirmakei.bankxml.parser.BankBuilder;
+import by.uladzimirmakei.bankxml.service.handler.BankErrorHandler;
+import by.uladzimirmakei.bankxml.service.parser.BankBuilder;
 import by.uladzimirmakei.bankxml.repository.impl.BankRepository;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +39,9 @@ public class BankSaxBuilder implements BankBuilder {
         try {
             reader.parse(fileName);
         } catch (IOException | SAXException e) {
-            logger.log(Level.ERROR, "SAX parser exception while parsing file {}", e.getMessage());
+            logger.log(Level.ERROR,
+                    "SAX parser exception while parsing file {}",
+                    e.getMessage());
         }
         bankRepository = handler.getBanks();
     }

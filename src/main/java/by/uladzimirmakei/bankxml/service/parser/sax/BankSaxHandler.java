@@ -1,8 +1,8 @@
-package by.uladzimirmakei.bankxml.parser.sax;
+package by.uladzimirmakei.bankxml.service.parser.sax;
 
-import by.uladzimirmakei.bankxml.entity.Bank;
-import by.uladzimirmakei.bankxml.entity.BankXmlTag;
-import by.uladzimirmakei.bankxml.entity.Deposit;
+import by.uladzimirmakei.bankxml.repository.entity.Bank;
+import by.uladzimirmakei.bankxml.repository.entity.BankXmlTag;
+import by.uladzimirmakei.bankxml.repository.entity.Deposit;
 import by.uladzimirmakei.bankxml.repository.impl.BankRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +39,8 @@ public class BankSaxHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) {
+    public void startElement(String uri, String localName,
+                             String qName, Attributes attributes) {
         if (ELEMENT_BANK.equals(qName)) {
             currentBank = setBankAttributes(attributes);
         } else if (ELEMENT_DEPOSIT.equals(qName)) {
@@ -70,20 +71,29 @@ public class BankSaxHandler extends DefaultHandler {
         String data = new String(ch, start, length).strip();
         if (currentXmlTag != null) {
             switch (currentXmlTag) {
-                case HOLDER -> currentDeposit.setHolder(data);
-                case AMOUNT -> {
+                case HOLDER:
+                    currentDeposit.setHolder(data);
+                    break;
+                case AMOUNT:
                     BigInteger amount = new BigInteger(data);
                     currentDeposit.setAmount(amount);
-                }
-                case PROFITABILITY -> currentDeposit.setProfitability(data);
-                case OPENING -> {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+                    break;
+                case PROFITABILITY:
+                    currentDeposit.setProfitability(data);
+                    break;
+                case OPENING:
+                    DateTimeFormatter formatter =
+                            DateTimeFormatter.ofPattern("d-MM-yyyy");
                     LocalDate date = LocalDate.parse(data, formatter);
                     currentDeposit.setOpeningDate(date);
-                }
-                case TERM -> currentDeposit.setTerm(Integer.parseInt(data));
-                default ->
-                        throw new EnumConstantNotPresentException(currentXmlTag.getDeclaringClass(), currentXmlTag.name());
+                    break;
+                case TERM:
+                    currentDeposit.setTerm(Integer.parseInt(data));
+                    break;
+                default:
+                    throw new EnumConstantNotPresentException(
+                            currentXmlTag.getDeclaringClass(),
+                            currentXmlTag.name());
             }
         }
         currentXmlTag = null;

@@ -1,9 +1,9 @@
-package by.uladzimirmakei.bankxml.parser.dom;
+package by.uladzimirmakei.bankxml.service.parser.dom;
 
-import by.uladzimirmakei.bankxml.entity.Bank;
-import by.uladzimirmakei.bankxml.entity.Deposit;
-import by.uladzimirmakei.bankxml.parser.BankBuilder;
+import by.uladzimirmakei.bankxml.repository.entity.Bank;
+import by.uladzimirmakei.bankxml.repository.entity.Deposit;
 import by.uladzimirmakei.bankxml.repository.impl.BankRepository;
+import by.uladzimirmakei.bankxml.service.parser.BankBuilder;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,11 +30,14 @@ public class BankDomBuilder implements BankBuilder {
 
     public BankDomBuilder() {
         bankRepository = BankRepository.getInstance();
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+                .newInstance();
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            logger.log(Level.ERROR, "Failed to create DocumentBuilderFactory {}", e.getMessage());
+            logger.log(Level.ERROR,
+                    "Failed to create DocumentBuilderFactory {}",
+                    e.getMessage());
         }
     }
 
@@ -56,35 +59,53 @@ public class BankDomBuilder implements BankBuilder {
                 bankRepository.add(bank);
             }
         } catch (IOException | SAXException e) {
-            logger.log(Level.ERROR, "DOM parser exception while parsing bank list {}", e.getMessage());
+            logger.log(Level.ERROR,
+                    "DOM parser exception while parsing bank list {}",
+                    e.getMessage());
         }
     }
 
 
     private Bank buildBank(Element bankElement) {
-        return new Bank()
-                .setBankName(bankElement.getAttribute("name"))
-                .setCountryRegistration(bankElement.getAttribute("registration"))
-                .setDeposits(buildListDeposit(bankElement));
+        Bank bank = new Bank();
+        bank.setBankName(bankElement.getAttribute("name"));
+        bank.setCountryRegistration(bankElement.getAttribute("registration"));
+        bank.setDeposits(buildListDeposit(bankElement));
+        return bank;
     }
 
     private List<Deposit> buildListDeposit(Element bankElement) {
-        Element depositsElement = (Element) bankElement.getElementsByTagName("deposits").item(0);
+        Element depositsElement = (Element) bankElement
+                .getElementsByTagName("deposits").item(0);
         List<Deposit> deposits = new ArrayList<>();
-        NodeList depositList = depositsElement.getElementsByTagName("deposit");
+        NodeList depositList = depositsElement
+                .getElementsByTagName("deposit");
         for (int i = 0; i < depositList.getLength(); i++) {
             Element depositElement = (Element) depositList.item(i);
-            long id = Long.parseLong(depositElement.getAttribute("id"));
-            BigInteger amount = new BigInteger(getElementTextContent(depositElement, "amount"));
-            int term = Integer.parseInt(getElementTextContent(depositElement, "term"));
+            long id = Long.parseLong(
+                    depositElement.getAttribute("id"));
+            BigInteger amount = new BigInteger(
+                    getElementTextContent(depositElement,
+                            "amount"));
+            int term = Integer.parseInt(
+                    getElementTextContent(depositElement,
+                            "term"));
             Deposit currentDeposit = new Deposit();
             currentDeposit.setId(id);
-            currentDeposit.setDepositType(depositElement.getAttribute("type"));
-            currentDeposit.setHolder(getElementTextContent(depositElement, "holder"));
+            currentDeposit.setDepositType(depositElement
+                    .getAttribute("type"));
+            currentDeposit.setHolder(
+                    getElementTextContent(depositElement,
+                            "holder"));
             currentDeposit.setAmount(amount);
-            currentDeposit.setProfitability(getElementTextContent(depositElement, "profitability"));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
-            LocalDate date = LocalDate.parse(getElementTextContent(depositElement, "opening"), formatter);
+            currentDeposit.setProfitability(
+                    getElementTextContent(depositElement,
+                            "profitability"));
+            DateTimeFormatter formatter = DateTimeFormatter
+                    .ofPattern("d-MM-yyyy");
+            LocalDate date = LocalDate.parse(
+                    getElementTextContent(depositElement,
+                            "opening"), formatter);
             currentDeposit.setOpeningDate(date);
             currentDeposit.setTerm(term);
             deposits.add(currentDeposit);
@@ -92,8 +113,10 @@ public class BankDomBuilder implements BankBuilder {
         return deposits;
     }
 
-    private static String getElementTextContent(Element element, String elementName) {
-        NodeList nodeList = element.getElementsByTagName(elementName);
+    private static String getElementTextContent(Element element,
+                                                String elementName) {
+        NodeList nodeList = element
+                .getElementsByTagName(elementName);
         Node node = nodeList.item(0);
         return node.getTextContent();
     }

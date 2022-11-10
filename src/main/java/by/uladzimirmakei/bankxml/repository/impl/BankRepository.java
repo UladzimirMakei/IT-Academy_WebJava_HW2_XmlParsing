@@ -1,6 +1,6 @@
 package by.uladzimirmakei.bankxml.repository.impl;
 
-import by.uladzimirmakei.bankxml.entity.Bank;
+import by.uladzimirmakei.bankxml.repository.entity.Bank;
 import by.uladzimirmakei.bankxml.repository.Repository;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -18,11 +18,12 @@ public class BankRepository implements Repository<Bank> {
     }
 
     private static class BankRepositoryHolder {
-        private static final BankRepository bankRepository = new BankRepository();
+        private static final BankRepository BANK_REPOSITORY =
+                new BankRepository();
     }
 
     public static BankRepository getInstance() {
-        return BankRepositoryHolder.bankRepository;
+        return BankRepositoryHolder.BANK_REPOSITORY;
     }
 
     @Override
@@ -41,12 +42,15 @@ public class BankRepository implements Repository<Bank> {
             int oldBankIndex = storage.indexOf(oldBank);
             storage.set(oldBankIndex, newBank);
         } else {
-            logger.log(Level.DEBUG,"Unable to update bank {}, it's not in the storage ", oldBank);
+            logger.log(Level.DEBUG,
+                    "Unable to update bank {}, it's not in the storage ",
+                    oldBank);
         }
     }
 
     @Override
     public String toString() {
-        return new StringBuilder("Repository of banks: ").append(storage).toString();
+        return new StringBuilder("Repository of banks: ")
+                .append(storage).toString();
     }
 }

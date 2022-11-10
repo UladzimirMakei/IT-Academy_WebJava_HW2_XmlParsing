@@ -1,4 +1,4 @@
-package by.uladzimirmakei.bankxml.handler;
+package by.uladzimirmakei.bankxml.service.handler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

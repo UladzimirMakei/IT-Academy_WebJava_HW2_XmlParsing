@@ -1,10 +1,10 @@
-package by.uladzimirmakei.bankxml.parser.stax;
+package by.uladzimirmakei.bankxml.service.parser.stax;
 
-import by.uladzimirmakei.bankxml.entity.Bank;
-import by.uladzimirmakei.bankxml.entity.BankXmlTag;
-import by.uladzimirmakei.bankxml.entity.Deposit;
-import by.uladzimirmakei.bankxml.parser.BankBuilder;
+import by.uladzimirmakei.bankxml.repository.entity.Bank;
+import by.uladzimirmakei.bankxml.repository.entity.BankXmlTag;
+import by.uladzimirmakei.bankxml.repository.entity.Deposit;
 import by.uladzimirmakei.bankxml.repository.impl.BankRepository;
+import by.uladzimirmakei.bankxml.service.parser.BankBuilder;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +48,9 @@ public class BankStaxBuilder implements BankBuilder {
                 }
             }
         } catch (XMLStreamException | IOException e) {
-            logger.log(Level.ERROR, "STAX parser exception while parsing file {}", e.getMessage());
+            logger.log(Level.ERROR,
+                    "STAX parser exception while parsing file {}",
+                    e.getMessage());
         }
     }
 
@@ -57,61 +59,66 @@ public class BankStaxBuilder implements BankBuilder {
         return bankRepository;
     }
 
-    private Bank buildBank(XMLStreamReader reader) throws XMLStreamException {
+    private Bank buildBank(XMLStreamReader reader)
+            throws XMLStreamException {
         List<Deposit> listDeposit = new ArrayList<>();
-        Bank bank = new Bank()
-                .setBankName(reader.getAttributeValue(null, BankXmlTag.NAME.getValue()))
-                .setCountryRegistration(reader.getAttributeValue(null,
-                        BankXmlTag.REGISTRATION.getValue()));
+        Bank bank = new Bank();
+        bank.setBankName(reader.getAttributeValue(
+                null, BankXmlTag.NAME.getValue()));
+        bank.setCountryRegistration(reader.getAttributeValue(null,
+                BankXmlTag.REGISTRATION.getValue()));
         String name;
         while (reader.hasNext()) {
             int type = reader.next();
             switch (type) {
-                case XMLStreamConstants.START_ELEMENT -> {
+                case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
                     if (name.equals(BankXmlTag.DEPOSITS.getValue())) {
                         listDeposit = buildListDeposit(reader);
                     }
-                }
-                case XMLStreamConstants.END_ELEMENT -> {
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
                     if (name.equals(BankXmlTag.BANK.getValue())) {
                         bank.setDeposits(listDeposit);
                         return bank;
                     }
-                }
+                    break;
             }
         }
         throw new XMLStreamException("Unknown element in tag <bank>");
     }
 
-    private List<Deposit> buildListDeposit(XMLStreamReader reader) throws XMLStreamException {
+    private List<Deposit> buildListDeposit(XMLStreamReader reader)
+            throws XMLStreamException {
         List<Deposit> resultList = new ArrayList<>();
         String name;
         while (reader.hasNext()) {
             int type = reader.next();
             switch (type) {
-                case XMLStreamConstants.START_ELEMENT -> {
+                case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
                     if (name.equals(BankXmlTag.DEPOSIT.getValue())) {
                         Deposit deposit = buildDeposit(reader);
                         resultList.add(deposit);
                     }
-                }
-                case XMLStreamConstants.END_ELEMENT -> {
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
                     if (name.equals(BankXmlTag.DEPOSITS.getValue())) {
                         return resultList;
                     }
-                }
+                    break;
             }
         }
         throw new XMLStreamException("Unknown element in tag <deposits>");
     }
 
-    private Deposit buildDeposit(XMLStreamReader reader) throws XMLStreamException {
+    private Deposit buildDeposit(XMLStreamReader reader)
+            throws XMLStreamException {
         Deposit deposit = new Deposit();
-        long id = Long.parseLong(reader.getAttributeValue(null, BankXmlTag.ID.getValue()));
+        long id = Long.parseLong(reader
+                .getAttributeValue(null, BankXmlTag.ID.getValue()));
         deposit.setId(id);
         deposit.setDepositType(reader.getAttributeValue(null,
                 BankXmlTag.TYPE.getValue()));
@@ -120,38 +127,47 @@ public class BankStaxBuilder implements BankBuilder {
         while (reader.hasNext()) {
             type = reader.next();
             switch (type) {
-                case XMLStreamConstants.START_ELEMENT -> {
+                case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
                     switch (BankXmlTag.valueOf(name.toUpperCase())) {
-                        case HOLDER -> deposit.setHolder(getXMLText(reader));
-                        case AMOUNT -> {
-                            BigInteger amount = new BigInteger(getXMLText(reader));
+                        case HOLDER:
+                            deposit.setHolder(getXMLText(reader));
+                            break;
+                        case AMOUNT:
+                            BigInteger amount = new BigInteger(
+                                    getXMLText(reader));
                             deposit.setAmount(amount);
-                        }
-                        case PROFITABILITY -> deposit.setProfitability(getXMLText(reader));
-                        case OPENING -> {
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
-                            LocalDate date = LocalDate.parse(getXMLText(reader), formatter);
+                            break;
+                        case PROFITABILITY:
+                            deposit.setProfitability(getXMLText(reader));
+                            break;
+                        case OPENING:
+                            DateTimeFormatter formatter = DateTimeFormatter
+                                    .ofPattern("d-MM-yyyy");
+                            LocalDate date = LocalDate.parse(getXMLText(reader),
+                                    formatter);
                             deposit.setOpeningDate(date);
-                        }
-                        case TERM -> {
+                            break;
+                        case TERM:
                             int term = Integer.parseInt(getXMLText(reader));
                             deposit.setTerm(term);
-                        }
+                            break;
                     }
-                }
-                case XMLStreamConstants.END_ELEMENT -> {
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (BankXmlTag.valueOf(name.toUpperCase()) == BankXmlTag.DEPOSIT) {
+                    if (BankXmlTag.valueOf(name.toUpperCase())
+                            == BankXmlTag.DEPOSIT) {
                         return deposit;
                     }
-                }
+                    break;
             }
         }
         throw new XMLStreamException("Unknown element in tag <deposit>");
     }
 
-    private String getXMLText(XMLStreamReader reader) throws XMLStreamException {
+    private String getXMLText(XMLStreamReader reader)
+            throws XMLStreamException {
         String text = null;
         if (reader.hasNext()) {
             reader.next();

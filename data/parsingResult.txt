@@ -25,7 +25,7 @@ openingDate = 2018-11-10, term = 5]
  
 Bank: 
 Bank name = Priorbank
-Country of registration = 
+Country of registration = null
 Deposits =[
 Deposit: id = 5573123
 depositType = corporate, holder = Alex Svetlau
